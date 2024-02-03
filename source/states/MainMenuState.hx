@@ -24,6 +24,8 @@ class MainMenuState extends MusicBeatState
 		'options'
 	];
 
+    var mainSide:FlxSprite;
+	var mods:FlxSprite;
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 
@@ -37,6 +39,10 @@ class MainMenuState extends MusicBeatState
 		#if DISCORD_ALLOWED
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
+		#end
+		
+		#if desktop
+		FlxG.mouse.visible = true;
 		#end
 
 		transIn = FlxTransitionableState.defaultTransIn;
@@ -65,6 +71,17 @@ class MainMenuState extends MusicBeatState
 		magenta.visible = false;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
+		
+		mainSide = new FlxSprite(0).loadGraphic(Paths.image('mainSide'));
+		mainSide.scrollFactor.x = 0;
+		mainSide.scrollFactor.y = 0;
+		mainSide.setGraphicSize(Std.int(mainSide.width * 0.75));
+		mainSide.updateHitbox();
+		mainSide.screenCenter();
+		mainSide.antialiasing = ClientPrefs.data.antialiasing;
+		mainSide.x = -50;
+		mainSide.y = -90;
+		add(mainSide);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -78,6 +95,8 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
+			menuItem.ID = i;
+			menuItem.x = 100;
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if (optionShit.length < 6)
@@ -86,11 +105,43 @@ class MainMenuState extends MusicBeatState
 			menuItem.updateHitbox();
 			menuItem.screenCenter(X);
 		}
+		
+		switch (FlxG.random.int(0, 1)) {
 
-		var psychVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
-		psychVer.scrollFactor.set();
-		psychVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(psychVer);
+			case 0:
+        var charDance = new FlxSprite(700, 200);
+        charDance.frames = Paths.getSparrowAtlas('mainmenu/menuCharacters/Boyfriend');
+        charDance.animation.addByPrefix('Idle', 'BF IDLE', 24);
+	charDance.animation.play('Idle');
+	charDance.updateHitbox();
+	charDance.scale.x = 1.5;
+	charDance.scale.y = 1.5;
+        add(charDance);
+
+
+			case 1:
+        var charDance = new FlxSprite(700, 200);
+        charDance.frames = Paths.getSparrowAtlas('mainmenu/menuCharacters/Girlfriend');
+        charDance.animation.addByPrefix('Idle', 'GF IDLE', 24);
+	charDance.animation.play('Idle');
+	charDance.updateHitbox();
+	charDance.scale.x = 1.5;
+	charDance.scale.y = 1.5;
+        add(charDance);
+				
+		}
+
+		#if MODS_ALLOWED
+		mods = new FlxSprite(820, -15).loadGraphic(Paths.image('mainmenu/MenuItems/mods'));
+		mods.scale.x = 0.8;
+		mods.scale.y = 0.8;
+		add(mods);
+		#end
+
+		var moonVer:FlxText = new FlxText(12, FlxG.height - 44, 0, "Moon Engine v" + moonEngineVersion, 12);
+		moonVer.scrollFactor.set();
+		moonVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(moonVer);
 		var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		fnfVer.scrollFactor.set();
 		fnfVer.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -112,7 +163,7 @@ class MainMenuState extends MusicBeatState
 
 		super.create();
 
-		FlxG.camera.follow(camFollow, null, 9);
+		FlxG.camera.follow(camFollow, null, 0);
 	}
 
 	var selectedSomethin:Bool = false;
@@ -125,6 +176,16 @@ class MainMenuState extends MusicBeatState
 			if (FreeplayState.vocals != null)
 				FreeplayState.vocals.volume += 0.5 * elapsed;
 		}
+		
+		#if MODS_ALLOWED
+		if (FlxG.mouse.overlaps(mods))
+		{
+				if (FlxG.mouse.justPressed)
+				{
+					MusicBeatState.switchState(new ModsMenuState());
+				}
+			}
+		#end
 
 		if (!selectedSomethin)
 		{
@@ -192,6 +253,7 @@ class MainMenuState extends MusicBeatState
 					{
 						if (i == curSelected)
 							continue;
+						FlxTween.tween(mods, {alpha: 0}, 0.4, {ease: FlxEase.quadOut});
 						FlxTween.tween(menuItems.members[i], {alpha: 0}, 0.4, {
 							ease: FlxEase.quadOut,
 							onComplete: function(twn:FlxTween)
@@ -217,7 +279,7 @@ class MainMenuState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 		menuItems.members[curSelected].animation.play('idle');
 		menuItems.members[curSelected].updateHitbox();
-		menuItems.members[curSelected].screenCenter(X);
+		//menuItems.members[curSelected].screenCenter(X);
 
 		curSelected += huh;
 
@@ -228,7 +290,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.members[curSelected].animation.play('selected');
 		menuItems.members[curSelected].centerOffsets();
-		menuItems.members[curSelected].screenCenter(X);
+		//menuItems.members[curSelected].screenCenter(X);
 
 		camFollow.setPosition(menuItems.members[curSelected].getGraphicMidpoint().x,
 			menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0));
