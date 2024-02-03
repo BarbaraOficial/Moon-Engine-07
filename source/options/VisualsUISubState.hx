@@ -76,6 +76,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			'hideHud',
 			'bool');
 		addOption(option);
+
+		var option:Option = new Option('Languages:',
+			"Put the game with your language!",
+			'languages',
+			'string',
+			['English', 'Português (Brasil)', 'Español', 'Français', 'Italiano', 'Deutsch']);
+		addOption(option);
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
