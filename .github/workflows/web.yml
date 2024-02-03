@@ -1,0 +1,70 @@
+name: Web
+on: workflow_dispatch
+jobs:
+  HTML5:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: latest
+
+      - name: Install Libraries
+        run: |
+          haxelib setup ~/haxelib
+          haxelib install hmm --quiet
+          haxelib run hmm install --quiet
+
+      - name: Compile
+        run: haxelib run lime build html5
+
+      - name: Upload Artifact
+        if: ${{ success() }}
+        uses: actions/upload-artifact@main
+        with:
+          name: html5Build
+          path: export/release/html5/bin
+          if-no-files-found: error
+  Emscripten:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Emscripten Toolchain
+        run: |
+          cd ~
+          git clone --quiet https://github.com/emscripten-core/emsdk.git > /dev/null
+          cd emsdk
+          ./emsdk install latest
+          ./emsdk activate latest
+          chmod +x ./emsdk_env.sh && echo 'source "/home/runner/emsdk/emsdk_env.sh"' >> $HOME/.bash_profile
+          echo "EMSDK=$HOME/emsdk:$HOME/emsdk/upstream/emscripten" >> $GITHUB_ENV
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
+        with:
+          haxe-version: latest
+
+      - name: Install Libraries
+        run: |
+          haxelib setup ~/haxelib
+          haxelib install hmm --quiet
+          haxelib run hmm install --quiet
+
+      - name: Configure Emscripten
+        run: haxelib run lime config EMSCRIPTEN_SDK $EMSDK
+
+      - name: Compile
+        run: PATH=$EMSDK:$PATH haxelib run lime build emscripten
+
+      - name: Upload Artifact
+        if: ${{ success() }}
+        uses: actions/upload-artifact@main
+        with:
+          name: emscriptenBuild
+          path: export/release/webassembly/bin
+          if-no-files-found: error
