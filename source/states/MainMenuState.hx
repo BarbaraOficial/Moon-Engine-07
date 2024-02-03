@@ -9,6 +9,7 @@ import options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
+	public static var moonEngineVersion:String = '2.0.1k';
 	public static var psychEngineVersion:String = '0.7.3'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
@@ -17,10 +18,8 @@ class MainMenuState extends MusicBeatState
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
-		#if MODS_ALLOWED 'mods', #end
 		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-		#if !switch 'donate', #end
 		'options'
 	];
 
