@@ -23,7 +23,7 @@ class MainMenuState extends MusicBeatState
 		'options'
 	];
 
-    var mainSide:FlxSprite;
+        var mainSide:FlxSprite;
 	var mods:FlxSprite;
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -102,7 +102,7 @@ class MainMenuState extends MusicBeatState
 				scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.updateHitbox();
-			menuItem.screenCenter(X);
+			//menuItem.screenCenter(X);
 		}
 		
 		switch (FlxG.random.int(0, 1)) {
