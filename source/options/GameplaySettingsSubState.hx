@@ -49,6 +49,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool');
 		addOption(option);
 
+		var option:Option = new Option('Disable RGB notes',
+			"If checked, RGB notes will be turned off",
+			'disableRGBnotes',
+			'bool');
+		addOption(option);
+
 		var option:Option = new Option('Disable Reset Button',
 			"If checked, pressing Reset won't do anything.",
 			'noReset',
