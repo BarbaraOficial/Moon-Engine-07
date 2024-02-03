@@ -33,7 +33,7 @@ class StrumNote extends FlxSprite
 		if(PlayState.SONG != null && PlayState.SONG.disableNoteRGB) {
      useRGBShader = false;
      }
-    else if (ClientPrefs.data.DisableRGBnotes) {
+    else if (ClientPrefs.data.sisableRGBnotes) {
      useRGBShader = false;
      }
 		
