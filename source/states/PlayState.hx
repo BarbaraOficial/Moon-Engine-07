@@ -88,6 +88,71 @@ class PlayState extends MusicBeatState
 		['Sick!', 1], //From 90% to 99%
 		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
+	
+	public static var ratingStuffBR:Array<Dynamic> = [
+		['Lixo', 0.2], //From 0% to 19%
+		['Merda', 0.4], //From 20% to 39%
+		['Ruim', 0.5], //From 40% to 49%
+		['Sério?', 0.6], //From 50% to 59%
+		['Meh', 0.69], //From 60% to 68%
+		['Ótimo', 0.7], //69%
+		['Bom', 0.8], //From 70% to 79%
+		['Excelente', 0.9], //From 80% to 89%
+		['Incrível!', 1], //From 90% to 99%
+		['Perfeito!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+	];
+	
+	public static var ratingStuffFCS:Array<Dynamic> = [
+		['Poubelle', 0.2], //From 0% to 19%
+		['Merde', 0.4], //From 20% to 39%
+		['Mauvais', 0.5], //From 40% to 49%
+		['Sérieux?', 0.6], //From 50% to 59%
+		['Mon', 0.69], //From 60% to 68%
+		['Excellent', 0.7], //69%
+		['Bien', 0.8], //From 70% to 79%
+		['Super', 0.9], //From 80% to 89%
+		['Incroyable!', 1], //From 90% to 99%
+		['Parfait!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+	];
+	
+	public static var ratingStuffIT:Array<Dynamic> = [
+		['Spazzatura', 0.2], //From 0% to 19%
+		['Merda', 0.4], //From 20% to 39%
+		['Cattivo', 0.5], //From 40% to 49%
+		['Serio?', 0.6], //From 50% to 59%
+		['Mio', 0.69], //From 60% to 68%
+		['Eccellente', 0.7], //69%
+		['Bene', 0.8], //From 70% to 79%
+		['Grande', 0.9], //From 80% to 89%
+		['Incredibile!', 1], //From 90% to 99%
+		['Perfetto!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+	];
+	
+	public static var ratingStuffESP:Array<Dynamic> = [
+		['Basura', 0.2], //From 0% to 19%
+		['Mierda', 0.4], //From 20% to 39%
+		['Malo', 0.5], //From 40% to 49%
+		['¿Enserio?', 0.6], //From 50% to 59%
+		['Nah', 0.69], //From 60% to 68%
+		['Aceptable', 0.7], //69%
+		['Bien', 0.8], //From 70% to 79%
+		['Excelente', 0.9], //From 80% to 89%
+		['¡Increíble!', 1], //From 90% to 99%
+		['¡¡Perfecto!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+	];
+	
+	public static var ratingStuffD:Array<Dynamic> = [
+		['Müll', 0.2], //From 0% to 19%
+		['Scheisse', 0.4], //From 20% to 39%
+		['Schlecht', 0.5], //From 40% to 49%
+		['Ernst?', 0.6], //From 50% to 59%
+		['Mein', 0.69], //From 60% to 68%
+		['Exzellent', 0.7], //69%
+		['Gut', 0.8], //From 70% to 79%
+		['Großartig', 0.9], //From 80% to 89%
+		['Unglaublich!', 1], //From 90% to 99%
+		['Perfekt!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+	];
 
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
@@ -1121,18 +1186,63 @@ class PlayState extends MusicBeatState
 			return;
 
 		var str:String = ratingName;
+		var strBR:String = ratingNameBR;
+		var strESP:String = ratingNameESP;
+		var strFCS:String = ratingNameFCS;
+		var strIT:String = ratingNameIT;
+		var strD:String = ratingNameD;
 		if(totalPlayed != 0)
 		{
 			var percent:Float = CoolUtil.floorDecimal(ratingPercent * 100, 2);
 			str += ' (${percent}%) - ${ratingFC}';
+			strBR += ' (${percent}%) - ${ratingFC}';
+			strESP += ' (${percent}%) - ${ratingFC}';
+			strFCS += ' (${percent}%) - ${ratingFC}';
+			strIT += ' (${percent}%) - ${ratingFC}';
+			strD += ' (${percent}%) - ${ratingFC}';
 		}
 
 		var tempScore:String = 'Score: ${songScore}'
 		+ (!instakillOnMiss ? ' | Misses: ${songMisses}' : "")
 		+ ' | Rating: ${str}';
+		var tempScoreBR:String = 'Pontuação: ${songScore}'
+		+ (!instakillOnMiss ? ' | Erros: ${songMisses}' : "")
+		+ ' | Precisão: ${strBR}';
+		var tempScoreFCS:String = 'Ponctuation: ${songScore}'
+		+ (!instakillOnMiss ? ' | les erreurs: ${songMisses}' : "")
+		+ ' | Précision: ${strFCS}';
+		var tempScoreIT:String = 'Punteggiatura: ${songScore}'
+		+ (!instakillOnMiss ? ' | Errori: ${songMisses}' : "")
+		+ ' | Precisione: ${strIT}';
+		var tempScoreESP:String = 'Puntuación: ${songScore}'
+		+ (!instakillOnMiss ? ' | Errores: ${songMisses}' : "")
+		+ ' | Precisión: ${strESP}';
+		var tempScoreD:String = 'Interpunktion: ${songScore}'
+		+ (!instakillOnMiss ? ' | Fehler: ${songMisses}' : "")
+		+ ' | Präzision: ${strD}';
 		// "tempScore" variable is used to prevent another memory leak, just in case
 		// "\n" here prevents the text from being cut off by beat zooms
+		switch (ClientPrefs.data.languages){
+     
+     case 'English':
 		scoreTxt.text = '${tempScore}\n';
+		
+	 case 'Português (Brasil)':
+	    scoreTxt.text = '${tempScoreBR}\n';
+	
+	 case 'Español':
+		scoreTxt.text = '${tempScoreESP}\n';
+		
+	case 'Français':
+		scoreTxt.text = '${tempScoreFCS}\n';
+		
+	case 'Italiano':
+		scoreTxt.text = '${tempScoreIT}\n';
+		
+     case 'Deutsch':
+		scoreTxt.text = '${tempScoreD}\n';
+
+       }
 
 		if (!miss && !cpuControlled)
 			doScoreBop();
@@ -3574,6 +3684,11 @@ else {
 	}
 
 	public var ratingName:String = '?';
+	public var ratingNameBR:String = '?';
+	public var ratingNameESP:String = '?';
+	public var ratingNameFCS:String = '?';
+	public var ratingNameIT:String = '?';
+	public var ratingNameD:String = '?';
 	public var ratingPercent:Float;
 	public var ratingFC:String;
 	public function RecalculateRating(badHit:Bool = false) {
@@ -3599,6 +3714,53 @@ else {
 						if(ratingPercent < ratingStuff[i][1])
 						{
 							ratingName = ratingStuff[i][0];
+							break;
+						}
+				// Rating Name Brasil
+				ratingNameBR = ratingStuffBR[ratingStuffBR.length-1][0]; //Uses last string
+				if(ratingPercent < 1)
+					for (i in 0...ratingStuffBR.length-1)
+						if(ratingPercent < ratingStuffBR[i][1])
+						{
+							ratingNameBR = ratingStuffBR[i][0];
+							break;
+						}
+						
+				// Rating Name Español
+				ratingNameESP = ratingStuffESP[ratingStuffESP.length-1][0]; //Uses last string
+				if(ratingPercent < 1)
+					for (i in 0...ratingStuffESP.length-1)
+						if(ratingPercent < ratingStuffESP[i][1])
+						{
+							ratingNameESP = ratingStuffESP[i][0];
+							break;
+						}
+						
+				// Rating Name French
+				ratingNameFCS = ratingStuffFCS[ratingStuffFCS.length-1][0]; //Uses last string
+				if(ratingPercent < 1)
+					for (i in 0...ratingStuffFCS.length-1)
+						if(ratingPercent < ratingStuffFCS[i][1])
+						{
+							ratingNameFCS = ratingStuffFCS[i][0];
+							break;
+						}
+				// Rating Name Italiano
+				ratingNameIT = ratingStuffIT[ratingStuffIT.length-1][0]; //Uses last string
+				if(ratingPercent < 1)
+					for (i in 0...ratingStuffIT.length-1)
+						if(ratingPercent < ratingStuffIT[i][1])
+						{
+							ratingNameIT = ratingStuffIT[i][0];
+							break;
+						}
+				// Rating Name Deutsch
+				ratingNameD = ratingStuffD[ratingStuffD.length-1][0]; //Uses last string
+				if(ratingPercent < 1)
+					for (i in 0...ratingStuffD.length-1)
+						if(ratingPercent < ratingStuffD[i][1])
+						{
+							ratingNameD = ratingStuffD[i][0];
 							break;
 						}
 			}
