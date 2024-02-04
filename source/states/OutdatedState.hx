@@ -16,18 +16,18 @@ class OutdatedState extends MusicBeatState
 
 		if (controls.mobileC) {
 			guh = "Sup kiddo, looks like you're running an   \n
-			outdated version of Psych Engine (" + MainMenuState.psychEngineVersion + "),\n
+			outdated version of Moon Engine (" + MainMenuState.moonEngineVersion + "),\n
 			please update to " + TitleState.updateVersion + "!\n
 			Press B to proceed anyway.\n
 			\n
-			Thank you for using the Port!";
+			Thank you for using Engine!";
 		} else {
 			guh = "Sup bro, looks like you're running an   \n
-			outdated version of Psych Engine (" + MainMenuState.psychEngineVersion + "),\n
+			outdated version of Moon Engine (" + MainMenuState.moonEngineVersion + "),\n
 			please update to " + TitleState.updateVersion + "!\n
 			Press ESCAPE to proceed anyway.\n
 			\n
-			Thank you for using the Port!";
+			Thank you for using Engine!";
 		}
 
 		warnText = new FlxText(0, 0, FlxG.width, guh, 32);
@@ -43,7 +43,7 @@ class OutdatedState extends MusicBeatState
 		if(!leftState) {
 			if (controls.ACCEPT) {
 				leftState = true;
-				CoolUtil.browserLoad("https://github.com/mcagabe19/FNF-PsychEngine-Mobile/releases");
+				CoolUtil.browserLoad("https://gamebanana.com/tools/14569");
 			}
 			else if(controls.BACK) {
 				leftState = true;
