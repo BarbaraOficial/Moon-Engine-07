@@ -77,6 +77,10 @@ class NoteSplash extends FlxSprite
 			}
 			else tempShader = Note.globalRgbShaders[direction];
 		}
+		else if (ClientPrefs.data.disableRGBnotes)
+		{
+		   // there's nothing lol
+		}
 
 		alpha = ClientPrefs.data.splashAlpha;
 		if(note != null) alpha = note.noteSplashData.a;
