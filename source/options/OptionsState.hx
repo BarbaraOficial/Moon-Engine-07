@@ -27,8 +27,10 @@ class OptionsState extends MusicBeatState
 		switch(label) {
 			case 'Note Colors':
 				openSubState(new options.NotesSubState());
+			 #if desktop
 			case 'Controls':
 				openSubState(new options.ControlsSubState());
+			 #end
 			case 'Graphics':
 				openSubState(new options.GraphicsSettingsSubState());
 			case 'Visuals and UI':
@@ -37,8 +39,10 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				MusicBeatState.switchState(new options.NoteOffsetState());
+			 #if mobile
 			case 'Mobile Options':
 				openSubState(new mobile.options.MobileOptionsSubState());
+			 #end
 		}
 	}
 
