@@ -194,7 +194,27 @@ class StoryMenuState extends MusicBeatState
 		lerpScore = Math.floor(FlxMath.lerp(intendedScore, lerpScore, Math.exp(-elapsed * 30)));
 		if(Math.abs(intendedScore - lerpScore) < 10) lerpScore = intendedScore;
 
+		switch (ClientPrefs.data.languages){
+     
+         case 'English':
 		scoreText.text = "WEEK SCORE:" + lerpScore;
+		
+	 case 'Português (Brasil)':
+		scoreText.text = "PONTUAÇÃO DA SEMANA:" + lerpScore;
+		
+	 case 'Español':
+		scoreText.text = "PUNTUACIÓN DE LA SEMANA:" + lerpScore;
+
+         case 'Français':
+		scoreText.text = "SCORE DE LA SEMAINE:" + lerpScore;
+
+	 case 'Italiano':
+		scoreText.text = "PUNTEGGIO DELLA SETTIMANA:" + lerpScore;
+		
+	 case 'Deutsch':
+		scoreText.text = "WOCHENPUNKTE:" + lerpScore;
+		
+		};
 
 		// FlxG.watch.addQuick('font', scoreText.font);
 
