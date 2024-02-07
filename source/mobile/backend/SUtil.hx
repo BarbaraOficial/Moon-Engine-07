@@ -47,7 +47,7 @@ class SUtil
 			case EXTERNAL_OBB:
 				daPath = Context.getObbDir();
 			case EXTERNAL:
-				daPath = Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
+				daPath = Environment.getExternalStorageDirectory() + '/.MoonEngine';
 			case MEDIA:
 				daPath = Environment.getExternalStorageDirectory() + '/Android/media/' + Application.current.meta.get('packageName');
 		}
