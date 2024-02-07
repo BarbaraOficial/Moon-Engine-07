@@ -89,8 +89,10 @@
     },
     {
       "name": "extension-androidtools",
-      "type": "haxelib",
-      "version": null
+      "type": "git",
+      "dir": null,
+      "ref": "main",
+      "url": "https://github.com/MAJigsaw77/extension-androidtools.git"
     }
   ]
 }
