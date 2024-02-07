@@ -5,6 +5,7 @@ import android.content.Context;
 import android.widget.Toast;
 import android.os.Environment;
 import android.Permissions;
+import android.Settings;
 import lime.app.Application;
 #end
 import haxe.io.Path;
@@ -181,7 +182,7 @@ class SUtil
 			Permissions.requestPermission(Permissions.READ_EXTERNAL_STORAGE);
 			Permissions.requestPermission(Permissions.WRITE_EXTERNAL_STORAGE);
 			showPopUp('If you accepted the permissions you are all good!' + '\nIf you didn\'t then expect a crash' + '\nPress Ok to see what happens', 'Notice!');
-                        android.Settings.requestSetting("android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION");
+                        if (!Environment.isExternalStorageManager()) Settings.requestSetting("android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION");
 		}
 	}
 	#end
