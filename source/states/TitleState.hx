@@ -82,11 +82,11 @@ class TitleState extends MusicBeatState
 		#end
 
 		#if LUA_ALLOWED
-        	#if (android && EXTERNAL || MEDIA)
+        	#if android
         try {
         	#end
 		Mods.pushGlobalMods();
-            #if (android && EXTERNAL || MEDIA)
+            #if android
         } catch (e:Dynamic) {
             SUtil.showPopUp("Please create folder to\n" + #if EXTERNAL "/storage/emulated/0/." + lime.app.Application.current.meta.get('file') #else "/storage/emulated/0/Android/media/" + lime.app.Application.current.meta.get('packageName') #end + "\nPress OK to close the game", "Error!");
             Sys.exit(1);
