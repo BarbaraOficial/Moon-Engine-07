@@ -42,6 +42,8 @@ class Main extends Sprite
 
 	public static var fpsVar:FPSCounter;
 
+	public static var watermark:Sprite;
+
 	#if mobile
 	public static final platform:String = "Phones";
 	#else
@@ -157,6 +159,15 @@ class Main extends Sprite
 		#if DISCORD_ALLOWED
 		DiscordClient.prepare();
 		#end
+
+		var bitmapData = Assets.getBitmapData("assets/images/watermark.png");
+
+		watermark = new Sprite();
+		watermark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
+		watermark.alpha = 0.4;
+		watermark.x = Lib.application.window.width - 10 - watermark.width;
+		watermark.y = Lib.application.window.height - 10 - watermark.height;
+		addChild(watermark);
 
 		#if mobile
 		LimeSystem.allowScreenTimeout = ClientPrefs.data.screensaver;
