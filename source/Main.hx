@@ -11,6 +11,7 @@ import openfl.system.System;
 import openfl.Lib;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import openfl.display.Bitmap;
 import openfl.display.StageScaleMode;
 import lime.system.System as LimeSystem;
 import lime.app.Application;
