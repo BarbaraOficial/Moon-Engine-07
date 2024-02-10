@@ -161,8 +161,7 @@ class Main extends Sprite
 		#end
 
 		// Mic'd Up SC code lol
-		var bitmapData = Assets.getBitmapData("assets/images/watermark.png");
-
+		var bitmapData = Assets.getBitmapData("assets/shared/images/watermark.png");
 		watermark = new Sprite();
 		watermark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
 		watermark.alpha = 0.4;
