@@ -160,6 +160,7 @@ class Main extends Sprite
 		DiscordClient.prepare();
 		#end
 
+		// Mic'd Up SC code lol
 		var bitmapData = Assets.getBitmapData("assets/images/watermark.png");
 
 		watermark = new Sprite();
