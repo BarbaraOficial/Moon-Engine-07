@@ -166,8 +166,8 @@ class Main extends Sprite
 		watermark = new Sprite();
 		watermark.addChild(new Bitmap(bitmapData)); // Sets the graphic of the sprite to a Bitmap object, which uses our embedded BitmapData class.
 		watermark.alpha = 0.4;
-		watermark.x = Lib.current.stage.stageWidth - 10 - watermark.width;
-		watermark.y = Lib.current.stage.stageHeight - 10 - watermark.height;
+		watermark.x = Lib.current.stage.stageWidth - 5 - watermark.width;
+		watermark.y = Lib.current.stage.stageHeight - 1 - watermark.height;
 		addChild(watermark);
 
 		#if mobile
