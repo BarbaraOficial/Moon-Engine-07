@@ -48,7 +48,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
                 #if !web
 		var option:Option = new Option('Loading Screens', //Name
-			"EXPERIMENTAL: Allows Loading Screen, broken with GPU Caching", //Description
+			"EXPERIMENTAL: Allows Loading Screen, speeds up loading times,\nbut might be incompatible with older PCs.", //Description
 			'loadingScreen',
 			'bool');
 		addOption(option);
