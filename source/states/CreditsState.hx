@@ -43,7 +43,7 @@ class CreditsState extends MusicBeatState
 			['BarbaraOficial',		                'barbaraoficial',		                'Main Programmer and leader of Moon Engine',							'https://twitter.com/Barbara_Origami',           'D00055'],
 			['DaricrahDev',				'daricrahdev',			'Programmer Helping at Moon Engine',						'https://twitter.com/Daricrah',		'FDE870'],
 			['Mig',				'mig',			'Moon Engine Main Artist',						'https://twitter.com/Daricrah',		'808080'],
-			['Oguri',				'oguri',			'Beta testing of Moon Engine',						'https://twitter.com/Daricrah',		'00008b'],
+			['Oguri',				'oguri',			'Beta testing of Moon Engine',						'https://youtube.com/@Oguri_0666',		'00008b'],
 			[''],
 			['Psych Mobile Porting Team'],
 			['mcagabe19',		                'lily',		                'Head Porter of Psych Engine Mobile',							'https://www.youtube.com/@mcagabe19',           'FFE7C0'],
