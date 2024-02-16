@@ -56,7 +56,7 @@ jobs:
           path: export/release/android/bin/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
           
-   WindowsBuild:
+  WindowsBuild:
     runs-on: windows-2019
     permissions: write-all
     steps:
