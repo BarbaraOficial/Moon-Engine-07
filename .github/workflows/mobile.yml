@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        storage-type: [EXTERNAL, OBB, DATA, MEDIA]
+        storage-type: [EXTERNAL]
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -54,38 +54,4 @@ jobs:
         with:
           name: androidBuild-${{ matrix.storage-type }}
           path: export/release/android/bin/app/build/outputs/apk/release/*.apk
-          if-no-files-found: error
-  iOS:
-    runs-on: macos-13
-    steps:
-      - name: Checkout
-        uses: actions/checkout@main
-
-      - name: Setup Haxe
-        uses: krdlab/setup-haxe@master
-        with:
-          haxe-version: 4.3.3
-
-      - name: Install Libraries
-        run: |
-          haxelib setup ~/haxelib
-          haxelib install hmm --quiet
-          haxelib run hmm install --quiet
-
-      - name: Compile
-        run: haxelib run lime build ios -D NOVIDEO -final
-
-      - name: Make Ipa
-        run: |
-          cd export/release/ios/build/*-iphoneos
-          mkdir Payload
-          mv *.app Payload
-          zip -r PsychEngine.ipa Payload
-
-      - name: Upload Artifact
-        if: ${{ success() }}
-        uses: actions/upload-artifact@main
-        with:
-          name: iOSBuild
-          path: export/release/ios/build/Release-iphoneos/*.ipa
           if-no-files-found: error
