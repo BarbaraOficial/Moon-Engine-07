@@ -9,7 +9,7 @@ import options.OptionsState;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var moonEngineVersion:String = '2.1.0';
+	public static var moonEngineVersion:String = '2.2.0';
 	public static var psychEngineVersion:String = '0.7.3'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
@@ -90,7 +90,17 @@ class MainMenuState extends MusicBeatState
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(0, (i * 140) + offset);
 			menuItem.antialiasing = ClientPrefs.data.antialiasing;
-			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
+			switch (ClientPrefs.data.languages){
+     
+                    case 'English':
+		        menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
+		
+	            case 'Português (Brasil)':
+			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menuLanguages/portuguese/menu_' + optionShit[i]);
+
+		    case 'Español':
+			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menuLanguages/spanish/menu_' + optionShit[i]);
+			}
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
