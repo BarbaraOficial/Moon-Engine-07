@@ -98,7 +98,7 @@ class MainMenuState extends MusicBeatState
 	            case 'Português (Brasil)':
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menuLanguages/portuguese/menu_' + optionShit[i]);
 			menuItem.scale.set(0.9, 0.9);
-			menuItem.y -= 15;
+			menuItem.y -= 13;
 
 		    case 'Español':
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menuLanguages/spanish/menu_' + optionShit[i]);
