@@ -4,6 +4,9 @@ package moonengine;
 public var hscriptArray:Array<HScript> = [];
 public var instancesExclude:Array<String> = [];
 #end
+#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
+#end
 #if LUA_ALLOWED public var luaArray:Array<FunkinLua> = []; #end
 #if CUSTOM_SHADERS_ALLOWED
 import shaders.openfl.filters.ShaderFilter as CustomShaderFilter;
