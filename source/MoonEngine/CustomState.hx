@@ -17,6 +17,8 @@ import tea.SScript;
 
 class CustomState extends MusicBeatState
 {
+override public function create()
+{
 	public function startLuasNamed(luaFile:String)
 	{
 		#if MODS_ALLOWED
@@ -107,5 +109,6 @@ class CustomState extends MusicBeatState
 				hscriptArray.remove(newScript);
 			}
 		}
-	}
+	 }
+  }
 }
