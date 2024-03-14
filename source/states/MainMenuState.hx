@@ -174,20 +174,12 @@ class MainMenuState extends MusicBeatState
 		#end
 		#end
 
-		#if ((LUA_ALLOWED || HSCRIPT_ALLOWED) && sys)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'states/MainMenuState'))
-			for (file in FileSystem.readDirectory(folder))
-			{
-				#if LUA_ALLOWED
-				if(file.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder + file);
-				#end
+		#if LUA_ALLOWED
+		startLuasNamed('states/MainMenuState.lua');
+		#end
 
-				#if HSCRIPT_ALLOWED
-				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
-				#end
-			}
+		#if HSCRIPT_ALLOWED
+		startHScriptsNamed('states/MainMenuState.hx');
 		#end
 
 		addVirtualPad(UP_DOWN, A_B_E);
