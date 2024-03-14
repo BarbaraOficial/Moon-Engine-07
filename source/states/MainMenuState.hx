@@ -64,10 +64,6 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-	
-	#if LUA_ALLOWED
-	public function startLuasNamed(luaFile:String)
-	{
 		
 		#if MODS_ALLOWED
 		Mods.pushGlobalMods();
