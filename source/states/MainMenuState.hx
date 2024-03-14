@@ -348,3 +348,117 @@ class MainMenuState extends MusicBeatState
 			menuItems.members[curSelected].getGraphicMidpoint().y - (menuItems.length > 4 ? menuItems.length * 8 : 0));
 	}
 }
+
+#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+	public function addTextToDebug(text:String, color:FlxColor) {
+		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
+		newText.text = text;
+		newText.color = color;
+		newText.disableTime = 6;
+		newText.alpha = 1;
+		newText.setPosition(10, 8 - newText.height);
+
+		luaDebugGroup.forEachAlive(function(spr:psychlua.DebugLuaText) {
+			spr.y += newText.height + 2;
+		});
+		luaDebugGroup.add(newText);
+		#if sys
+		Sys.println(text);
+		#else
+		trace(text);
+		#end
+	}
+	#end
+	
+	public function startLuasNamed(luaFile:String)
+	{
+		#if MODS_ALLOWED
+		var luaToLoad:String = Paths.modFolders(luaFile);
+		if(!FileSystem.exists(luaToLoad))
+			luaToLoad = Paths.getSharedPath(luaFile);
+
+		if(FileSystem.exists(luaToLoad))
+		#elseif sys
+		var luaToLoad:String = Paths.getSharedPath(luaFile);
+		if(Assets.exists(luaToLoad))
+		#end
+		{
+			for (script in luaArray)
+				if(script.scriptName == luaToLoad) return false;
+
+			new FunkinLua(luaToLoad);
+			return true;
+		}
+		return false;
+	}
+
+	public function startHScriptsNamed(scriptFile:String)
+	{
+		#if MODS_ALLOWED
+		var scriptToLoad:String = Paths.modFolders(scriptFile);
+		if(!FileSystem.exists(scriptToLoad))
+			scriptToLoad = Paths.getSharedPath(scriptFile);
+		#else
+		var scriptToLoad:String = Paths.getSharedPath(scriptFile);
+		#end
+
+		if(FileSystem.exists(scriptToLoad))
+		{
+			if (SScript.global.exists(scriptToLoad)) return false;
+
+			initHScript(scriptToLoad);
+			return true;
+		}
+		return false;
+	}
+
+	public function initHScript(file:String)
+	{
+		try
+		{
+			var newScript:HScript = new HScript(null, file);
+			if(newScript.parsingException != null)
+			{
+				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
+				newScript.destroy();
+				return;
+			}
+
+			hscriptArray.push(newScript);
+			if(newScript.exists('onCreate'))
+			{
+				var callValue = newScript.call('onCreate');
+				if(!callValue.succeeded)
+				{
+					for (e in callValue.exceptions)
+					{
+						if (e != null)
+						{
+							var len:Int = e.message.indexOf('\n') + 1;
+							if(len <= 0) len = e.message.length;
+								addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, len)}', FlxColor.RED);
+						}
+					}
+
+					newScript.destroy();
+					hscriptArray.remove(newScript);
+					trace('failed to initialize tea interp!!! ($file)');
+				}
+				else trace('initialized tea interp successfully: $file');
+			}
+
+		}
+		catch(e)
+		{
+			var len:Int = e.message.indexOf('\n') + 1;
+			if(len <= 0) len = e.message.length;
+			addTextToDebug('ERROR - ' + e.message.substr(0, len), FlxColor.RED);
+			var newScript:HScript = cast (SScript.global.get(file), HScript);
+			if(newScript != null)
+			{
+				newScript.destroy();
+				hscriptArray.remove(newScript);
+			}
+		}
+	 }
+}
