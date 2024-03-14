@@ -1,4 +1,4 @@
-package moonengine
+package moonengine;
 
 #if CUSTOM_SHADERS_ALLOWED
 import shaders.openfl.filters.ShaderFilter as CustomShaderFilter;
