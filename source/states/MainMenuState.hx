@@ -7,7 +7,7 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
-import MoonEngine.CustomState;
+import moonengine.CustomState;
 #if CUSTOM_SHADERS_ALLOWED
 import shaders.openfl.filters.ShaderFilter as CustomShaderFilter;
 import openfl.filters.BitmapFilter;
