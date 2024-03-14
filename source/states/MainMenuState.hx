@@ -63,7 +63,8 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		#if LUA_ALLOWED
+	
+	#if LUA_ALLOWED
 	public function startLuasNamed(luaFile:String)
 	{
 		#if MODS_ALLOWED
@@ -98,7 +99,7 @@ class MainMenuState extends MusicBeatState
 		var scriptToLoad:String = Paths.getSharedPath(scriptFile);
 		#end
 
-		if(#if sys FileSystem.exists(scriptToLoad) #else Assets.exists(scriptToLoad) #end)
+		if (#if sys FileSystem.exists(scriptToLoad) #else Assets.exists(scriptToLoad) #end)
 		{
 			if (SScript.global.exists(scriptToLoad)) return false;
 
@@ -107,7 +108,6 @@ class MainMenuState extends MusicBeatState
 		}
 		return false;
 	}
-}
 
 	public function initHScript(file:String)
 	{
