@@ -61,6 +61,7 @@ override public function create()
 		}
 		return false;
 	}
+}
 
 	public function initHScript(file:String)
 	{
