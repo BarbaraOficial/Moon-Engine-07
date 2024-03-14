@@ -25,6 +25,7 @@ import tea.SScript;
 
 class CustomState extends MusicBeatState
 {
+override public function create()
 #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
 	public function addTextToDebug(text:String, color:FlxColor) {
 		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
@@ -137,4 +138,5 @@ class CustomState extends MusicBeatState
 			}
 		}
 	 }
-  }
+    }
+}
