@@ -390,6 +390,7 @@ class MainMenuState extends MusicBeatState
 		}
 		return false;
 	}
+}
 
 	public function initHScript(file:String)
 	{
