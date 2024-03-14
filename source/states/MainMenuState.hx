@@ -6,6 +6,12 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
+#if LUA_ALLOWED
+import psychlua.*;
+#else
+import psychlua.LuaUtils;
+import psychlua.HScript;
+#end
 
 class MainMenuState extends MusicBeatState
 {
