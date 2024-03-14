@@ -7,7 +7,6 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
-import moonengine.CustomState;
 #if CUSTOM_SHADERS_ALLOWED
 import shaders.openfl.filters.ShaderFilter as CustomShaderFilter;
 import openfl.filters.BitmapFilter;
@@ -26,9 +25,10 @@ import tea.SScript;
 class MainMenuState extends MusicBeatState
 {
         #if HSCRIPT_ALLOWED
-	public var hscriptArray:Array<HScript> = [];
-	public var instancesExclude:Array<String> = [];
-	#end
+public var hscriptArray:Array<HScript> = [];
+public var instancesExclude:Array<String> = [];
+#end
+#if LUA_ALLOWED public var luaArray:Array<FunkinLua> = []; #end
 
 	#if LUA_ALLOWED
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
