@@ -25,9 +25,8 @@ import tea.SScript;
 
 class CustomState extends MusicBeatState
 {
-override public function create()
 #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-	public function addTextToDebug(text:String, color:FlxColor) {
+	function addTextToDebug(text:String, color:FlxColor) {
 		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
 		newText.text = text;
 		newText.color = color;
@@ -47,7 +46,7 @@ override public function create()
 	}
 	#end
 	
-	public function startLuasNamed(luaFile:String)
+	function startLuasNamed(luaFile:String)
 	{
 		#if MODS_ALLOWED
 		var luaToLoad:String = Paths.modFolders(luaFile);
@@ -69,7 +68,7 @@ override public function create()
 		return false;
 	}
 
-	public function startHScriptsNamed(scriptFile:String)
+	function startHScriptsNamed(scriptFile:String)
 	{
 		#if MODS_ALLOWED
 		var scriptToLoad:String = Paths.modFolders(scriptFile);
@@ -89,7 +88,7 @@ override public function create()
 		return false;
 	}
 
-	public function initHScript(file:String)
+	function initHScript(file:String)
 	{
 		try
 		{
@@ -139,4 +138,3 @@ override public function create()
 		}
 	 }
     }
-}
