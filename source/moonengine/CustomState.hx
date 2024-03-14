@@ -1,5 +1,10 @@
 package moonengine;
 
+#if HSCRIPT_ALLOWED
+public var hscriptArray:Array<HScript> = [];
+public var instancesExclude:Array<String> = [];
+#end
+#if LUA_ALLOWED public var luaArray:Array<FunkinLua> = []; #end
 #if CUSTOM_SHADERS_ALLOWED
 import shaders.openfl.filters.ShaderFilter as CustomShaderFilter;
 import openfl.filters.BitmapFilter;
@@ -17,6 +22,27 @@ import tea.SScript;
 
 class CustomState extends MusicBeatState
 {
+#if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+	public function addTextToDebug(text:String, color:FlxColor) {
+		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
+		newText.text = text;
+		newText.color = color;
+		newText.disableTime = 6;
+		newText.alpha = 1;
+		newText.setPosition(10, 8 - newText.height);
+
+		luaDebugGroup.forEachAlive(function(spr:psychlua.DebugLuaText) {
+			spr.y += newText.height + 2;
+		});
+		luaDebugGroup.add(newText);
+		#if sys
+		Sys.println(text);
+		#else
+		trace(text);
+		#end
+	}
+	#end
+	
 	public function startLuasNamed(luaFile:String)
 	{
 		#if MODS_ALLOWED
