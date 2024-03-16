@@ -7,44 +7,9 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
-#if CUSTOM_SHADERS_ALLOWED
-import shaders.openfl.filters.ShaderFilter as CustomShaderFilter;
-import openfl.filters.BitmapFilter;
-import shaders.CustomShaders;
-#end
-#if LUA_ALLOWED
-import psychlua.*;
-#else
-import psychlua.LuaUtils;
-import psychlua.HScript;
-#end
-#if SScript
-import tea.SScript;
-#end
 
 class MainMenuState extends MusicBeatState
 {
-        #if HSCRIPT_ALLOWED
-public var hscriptArray:Array<HScript> = [];
-public var instancesExclude:Array<String> = [];
-#end
-#if LUA_ALLOWED public var luaArray:Array<FunkinLua> = []; #end
-        #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-	private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
-	#end
-	#if LUA_ALLOWED
-	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
-	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
-	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
-	public var modchartSounds:Map<String, FlxSound> = new Map<String, FlxSound>();
-	public var modchartTexts:Map<String, FlxText> = new Map<String, FlxText>();
-	public var modchartSaves:Map<String, FlxSave> = new Map<String, FlxSave>();
-	#if CUSTOM_SHADERS_ALLOWED
-	public var modchartShader:Map<String, Effect> = new Map<String, Effect>();
-	public var shaderUpdates:Array<Float->Void> = [];
-	#end
-	#end
-	
 	public static var moonEngineVersion:String = '2.2.0';
 	public static var psychEngineVersion:String = '0.7.3'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -205,14 +170,6 @@ public var instancesExclude:Array<String> = [];
 		#end
 		#end
 
-				#if LUA_ALLOWED
-					new FunkinLua('states/MainMenuState.lua');
-				#end
-
-				#if HSCRIPT_ALLOWED
-					initHScript('states/MainMenuState.hx');
-				#end
-
 
 		addVirtualPad(UP_DOWN, A_B_E);
 
@@ -221,76 +178,6 @@ public var instancesExclude:Array<String> = [];
 		FlxG.camera.follow(camFollow, null, 0);
 
 	}
-   #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
-	public function addTextToDebug(text:String, color:FlxColor) {
-		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
-		newText.text = text;
-		newText.color = color;
-		newText.disableTime = 6;
-		newText.alpha = 1;
-		newText.setPosition(10, 8 - newText.height);
-
-		luaDebugGroup.forEachAlive(function(spr:psychlua.DebugLuaText) {
-			spr.y += newText.height + 2;
-		});
-		luaDebugGroup.add(newText);
-		#if sys
-		Sys.println(text);
-		#else
-		trace(text);
-		#end
-	}
-	#end
-	
-	public function initHScript(file:String)
-	{
-		try
-		{
-			var newScript:HScript = new HScript(null, file);
-			if(newScript.parsingException != null)
-			{
-				addTextToDebug('ERROR ON LOADING: ${newScript.parsingException.message}', FlxColor.RED);
-				newScript.destroy();
-				return;
-			}
-
-			hscriptArray.push(newScript);
-			if(newScript.exists('onCreate'))
-			{
-				var callValue = newScript.call('onCreate');
-				if(!callValue.succeeded)
-				{
-					for (e in callValue.exceptions)
-					{
-						if (e != null)
-						{
-							var len:Int = e.message.indexOf('\n') + 1;
-							if(len <= 0) len = e.message.length;
-								addTextToDebug('ERROR ($file: onCreate) - ${e.message.substr(0, len)}', FlxColor.RED);
-						}
-					}
-
-					newScript.destroy();
-					hscriptArray.remove(newScript);
-					trace('failed to initialize tea interp!!! ($file)');
-				}
-				else trace('initialized tea interp successfully: $file');
-			}
-
-		}
-		catch(e)
-		{
-			var len:Int = e.message.indexOf('\n') + 1;
-			if(len <= 0) len = e.message.length;
-			addTextToDebug('ERROR - ' + e.message.substr(0, len), FlxColor.RED);
-			var newScript:HScript = cast (SScript.global.get(file), HScript);
-			if(newScript != null)
-			{
-				newScript.destroy();
-				hscriptArray.remove(newScript);
-			}
-		}
-	 }
 
 
 	var selectedSomethin:Bool = false;
