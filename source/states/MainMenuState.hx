@@ -156,10 +156,10 @@ public var instancesExclude:Array<String> = [];
         var charDance = new FlxSprite(700, 200);
         charDance.frames = Paths.getSparrowAtlas('mainmenu/menuCharacters/Boyfriend');
         charDance.animation.addByPrefix('Idle', 'BF IDLE', 24);
-	charDance.animation.play('Idle');
-	charDance.updateHitbox();
-	charDance.scale.x = 1.5;
-	charDance.scale.y = 1.5;
+		charDance.animation.play('Idle');
+		charDance.updateHitbox();
+		charDance.scale.x = 1.5;
+		charDance.scale.y = 1.5;
         add(charDance);
 
 
@@ -167,10 +167,10 @@ public var instancesExclude:Array<String> = [];
         var charDance = new FlxSprite(700, 200);
         charDance.frames = Paths.getSparrowAtlas('mainmenu/menuCharacters/Girlfriend');
         charDance.animation.addByPrefix('Idle', 'GF IDLE', 24);
-	charDance.animation.play('Idle');
-	charDance.updateHitbox();
-	charDance.scale.x = 1.5;
-	charDance.scale.y = 1.5;
+		charDance.animation.play('Idle');
+		charDance.updateHitbox();
+		charDance.scale.x = 1.5;
+		charDance.scale.y = 1.5;
         add(charDance);
 				
 		}
@@ -226,7 +226,7 @@ public var instancesExclude:Array<String> = [];
 
 		FlxG.camera.follow(camFollow, null, 0);
 
-	
+		}
 	public function initHScript(file:String)
 	{
 		try
