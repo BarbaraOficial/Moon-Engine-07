@@ -276,7 +276,6 @@ public var instancesExclude:Array<String> = [];
 			}
 		}
 	 }
-}
 
 	var selectedSomethin:Bool = false;
 
