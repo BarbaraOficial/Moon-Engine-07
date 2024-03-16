@@ -29,7 +29,9 @@ public var hscriptArray:Array<HScript> = [];
 public var instancesExclude:Array<String> = [];
 #end
 #if LUA_ALLOWED public var luaArray:Array<FunkinLua> = []; #end
-
+        #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+	private var luaDebugGroup:FlxTypedGroup<psychlua.DebugLuaText>;
+	#end
 	#if LUA_ALLOWED
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
