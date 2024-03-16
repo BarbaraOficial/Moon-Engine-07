@@ -205,20 +205,13 @@ public var instancesExclude:Array<String> = [];
 		#end
 		#end
 
-		#if ((LUA_ALLOWED || HSCRIPT_ALLOWED) && sys)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'states/MainMenuState'))
-			{
 				#if LUA_ALLOWED
-				if(folder.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder);
+					new FunkinLua('states/MainMenuState.lua');
 				#end
 
 				#if HSCRIPT_ALLOWED
-				if(folder.toLowerCase().endsWith('.hx'))
-					initHScript(folder);
+					initHScript('states/MainMenuState.hx');
 				#end
-			}
-		#end
 
 
 		addVirtualPad(UP_DOWN, A_B_E);
