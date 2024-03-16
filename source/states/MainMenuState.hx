@@ -227,7 +227,27 @@ public var instancesExclude:Array<String> = [];
 		FlxG.camera.follow(camFollow, null, 0);
 
 	}
+   #if (LUA_ALLOWED || HSCRIPT_ALLOWED)
+	public function addTextToDebug(text:String, color:FlxColor) {
+		var newText:psychlua.DebugLuaText = luaDebugGroup.recycle(psychlua.DebugLuaText);
+		newText.text = text;
+		newText.color = color;
+		newText.disableTime = 6;
+		newText.alpha = 1;
+		newText.setPosition(10, 8 - newText.height);
 
+		luaDebugGroup.forEachAlive(function(spr:psychlua.DebugLuaText) {
+			spr.y += newText.height + 2;
+		});
+		luaDebugGroup.add(newText);
+		#if sys
+		Sys.println(text);
+		#else
+		trace(text);
+		#end
+	}
+	#end
+	
 	public function initHScript(file:String)
 	{
 		try
