@@ -206,17 +206,16 @@ public var instancesExclude:Array<String> = [];
 		#end
 
 		#if ((LUA_ALLOWED || HSCRIPT_ALLOWED) && sys)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'states/'))
-			for (file in FileSystem.readDirectory('MainMenuState'))
+		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'states/MainMenuState'))
 			{
 				#if LUA_ALLOWED
-				if(file.toLowerCase().endsWith('.lua'))
-					new FunkinLua(folder + file);
+				if(folder.toLowerCase().endsWith('.lua'))
+					new FunkinLua(folder);
 				#end
 
 				#if HSCRIPT_ALLOWED
-				if(file.toLowerCase().endsWith('.hx'))
-					initHScript(folder + file);
+				if(folder.toLowerCase().endsWith('.hx'))
+					initHScript(folder);
 				#end
 			}
 		#end
