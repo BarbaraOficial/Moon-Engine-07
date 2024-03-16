@@ -11,7 +11,7 @@
 	<SubTexture name="awards basic0006" x="0" y="125" width="343" height="125"/>
 	<SubTexture name="awards basic0007" x="0" y="125" width="343" height="125"/>
 	<SubTexture name="awards basic0008" x="0" y="125" width="343" height="125"/>
-	<SubTexture name="awards white0000" x="343" y="125" width="522" height="192" frameX="0" frameY="-1" frameWidth="522" frameHeight="195"/>
-	<SubTexture name="awards white0001" x="0" y="317" width="520" height="195" frameX="-2" frameY="0" frameWidth="522" frameHeight="195"/>
-	<SubTexture name="awards white0002" x="0" y="512" width="516" height="195" frameX="-5" frameY="0" frameWidth="522" frameHeight="195"/>
+	<SubTexture name="awards white0000" x="343" y="125" width="566" height="158" frameX="0" frameY="-1" frameWidth="566" frameHeight="159"/>
+	<SubTexture name="awards white0001" x="0" y="283" width="566" height="159"/>
+	<SubTexture name="awards white0002" x="0" y="442" width="566" height="159"/>
 </TextureAtlas>
