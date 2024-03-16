@@ -226,7 +226,8 @@ public var instancesExclude:Array<String> = [];
 
 		FlxG.camera.follow(camFollow, null, 0);
 
-		}
+	}
+
 	public function initHScript(file:String)
 	{
 		try
@@ -277,6 +278,7 @@ public var instancesExclude:Array<String> = [];
 		}
 	 }
 
+
 	var selectedSomethin:Bool = false;
 
 	override function update(elapsed:Float)
@@ -295,7 +297,7 @@ public var instancesExclude:Array<String> = [];
 				{
 					MusicBeatState.switchState(new ModsMenuState());
 				}
-			}
+		}
 		#end
 
 		if (!selectedSomethin)
