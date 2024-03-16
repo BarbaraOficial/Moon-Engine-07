@@ -206,8 +206,8 @@ public var instancesExclude:Array<String> = [];
 		#end
 
 		#if ((LUA_ALLOWED || HSCRIPT_ALLOWED) && sys)
-		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'states/MainMenuState'))
-			for (file in FileSystem.readDirectory(folder))
+		for (folder in Mods.directoriesWithFile(Paths.getSharedPath(), 'states/'))
+			for (file in FileSystem.readDirectory('MainMenuState'))
 			{
 				#if LUA_ALLOWED
 				if(file.toLowerCase().endsWith('.lua'))
