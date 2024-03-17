@@ -97,6 +97,7 @@ override function update(elapsed:Float)
 			{
 				MusicBeatState.switchState(new FreeplayState());
 			}
+	         }
 	
 // Project Engine code too :)	
 function updateScoreResult(newValue:Float)
