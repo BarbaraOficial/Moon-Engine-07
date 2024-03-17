@@ -10,18 +10,20 @@ import flixel.addons.display.FlxGridOverlay;
 
 class ResultsScreen extends MusicBeatSubstate
 {
+    var Timer:FlxTimer;
+
     var campaignScore = PlayState.campaignScore;
-    var campaignMisses = PlayState.campaignMisses;
+	var campaignMisses = PlayState.campaignMisses;
 	
 override function create()
 {
      Timer = new FlxTimer();
 
-                var bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
-	        bg.setGraphicSize(FlxG.width, FlxG.height);
-	        bg.screenCenter();
-	        bg.scrollFactor.set();
-	        add(bg);
+        var bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
+		bg.setGraphicSize(FlxG.width, FlxG.height);
+		bg.screenCenter();
+		bg.scrollFactor.set();
+		add(bg);
 		
 		var side = FlxSprite(0, 0,).loadGraphic(Paths.image('side'));
 		side.setGraphicSize(FlxG.width, FlxG.height);
@@ -30,7 +32,7 @@ override function create()
 		
 		var scoreText:FlxText = new FlxText(30, 217, 0, 'Score: 0');
 		scoreText.scrollFactor.set();
-		add(scoreTxt);
+		add(scoreText);
 		
 		var missesText:FlxText = new FlxText(30, 77, 0, 'Misses: 0');
 		missesText.scrollFactor.set();
@@ -48,11 +50,6 @@ override function create()
 		{
 			FlxTween.num(0, ${campaignScore}, 3.0, {type: FlxTweenType.ONESHOT, ease: FlxEase.cubeIn}, updateScoreResult);
 			FlxTween.num(0, ${campaignMisses}, 3.0, {type: FlxTweenType.ONESHOT, ease: FlxEase.cubeIn}, updateMissResult);
-		}
-		else
-		{
-			FlxTween.num(0, ${score}, 3.0, {type: FlxTweenType.ONESHOT, ease: FlxEase.cubeIn}, updateScoreResult);
-			FlxTween.num(0, ${misses}, 3.0, {type: FlxTweenType.ONESHOT, ease: FlxEase.cubeIn}, updateMissResult);
 		}
 		
 		addVirtualPad(NONE, A);
@@ -97,7 +94,7 @@ override function update(elapsed:Float)
 			{
 				MusicBeatState.switchState(new FreeplayState());
 			}
-	         }
+		}
 	
 // Project Engine code too :)	
 function updateScoreResult(newValue:Float)
