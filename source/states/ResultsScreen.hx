@@ -11,17 +11,17 @@ import flixel.addons.display.FlxGridOverlay;
 class ResultsScreen extends MusicBeatSubstate
 {
     var campaignScore = PlayState.campaignScore;
-	var campaignMisses = PlayState.campaignMisses;
+    var campaignMisses = PlayState.campaignMisses;
 	
 override function create()
 {
      Timer = new FlxTimer();
 
-        var bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
-		bg.setGraphicSize(FlxG.width, FlxG.height);
-		bg.screenCenter();
-		bg.scrollFactor.set();
-		add(bg);
+                var bg = new FlxSprite(0, 0).loadGraphic(Paths.image('menuDesat'));
+	        bg.setGraphicSize(FlxG.width, FlxG.height);
+	        bg.screenCenter();
+	        bg.scrollFactor.set();
+	        add(bg);
 		
 		var side = FlxSprite(0, 0,).loadGraphic(Paths.image('side'));
 		side.setGraphicSize(FlxG.width, FlxG.height);
@@ -57,7 +57,7 @@ override function create()
 		
 		addVirtualPad(NONE, A);
 		
-		super.create()
+		super.create();
 }
 
 override function update(elapsed:Float)
